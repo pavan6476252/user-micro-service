@@ -53,6 +53,7 @@ export const updateWhatsappNotificationStatus = async (req, res) => {
   );
   return res.status(response.statusCode).json(response);
 };
+
 export const updateMailNotificationStatus = async (req, res) => {
   const uid = req.uid;
   const { status } = req.body;

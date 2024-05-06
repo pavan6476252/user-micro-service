@@ -1,13 +1,6 @@
-const StatusCodes = {
-  OK: 200,
-  CREATED: 201,
-  BAD_REQUEST: 400,
-  UN_AUTHORIZED: 403,
-  NOT_FOUND: 404,
-  INTERNAL_SERVER_ERROR: 500,
-};
+import { StatusCodes } from "../httpStatusCodes";
 
-export default StatusCodes;
+ 
 
 class BaseError extends Error {
   constructor(
@@ -30,31 +23,36 @@ class BaseError extends Error {
 }
 
 // 500 internal error
-class APIError extends BaseError {
+export class APIError extends BaseError {
   constructor(description = "API Error") {
     super("API Internal Error", StatusCodes.INTERNAL_SERVER_ERROR, description);
   }
 }
 
 // 400 validation error
-class ValidationError extends BaseError {
+export class ValidationError extends BaseError {
   constructor(description = "Bad Request") {
     super("BAS REQUEST", StatusCodes.BAD_REQUEST, description);
   }
 }
 
 // 403 Authorization error
-class AuthorizationError extends BaseError {
+export class AuthorizationError extends BaseError {
   constructor(description = "access denied") {
     super("access denied", StatusCodes.UN_AUTHORIZED, description);
   }
 }
 
 // 404 Not found
-class NotFoundError extends BaseError {
+export class NotFoundError extends BaseError {
   constructor(description = "not found") {
     super("not found", StatusCodes.BAD_REQUEST, description);
   }
 }
 
-export { APIError, ValidationError, AuthorizationError, NotFoundError };
+// 409 Not found
+export class ConflictError extends BaseError {
+  constructor(description = "conflict error") {
+    super("conflict error", StatusCodes.CONFLICT, description);
+  }
+}

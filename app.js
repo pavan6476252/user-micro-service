@@ -3,24 +3,29 @@ import cors from "cors";
 import userRouter from "./routes/routes.js";
 import exceptionHandler from "./utils/ExceptionHandler.js";
 import morgan from "morgan";
+import { userApi } from "./api/user-api.js";
+import { verifyToken } from "./middlewares/verifyToken.js";
 
-const expressApp = express();
-expressApp.use(cors());
+const expressApp = (app) => {
+  app.use(cors());
 
-expressApp.use(express.json());
-expressApp.use(
-  express.urlencoded({
-    extended: true,
-  })
-);
-expressApp.use(morgan());
+  app.use(express.json());
 
-expressApp.get("/", (req, res) => {
-  res.send("User Server 👤");
-});
+  app.use(
+    express.urlencoded({
+      extended: true,
+    })
+  );
 
-expressApp.use("/api/v1", userRouter);
+  app.use(morgan());
 
-expressApp.use(exceptionHandler);
+  app.get("/", (req, res) => {
+    res.send("User Server 👤");
+  });
+
+  app.use("/api/v2/user", userApi);
+
+  app.use("/api/v1", userRouter);
+};
 
 export default expressApp;

@@ -31,14 +31,14 @@ const UserSchema = new Schema(
     gender: {
       type: String,
       default: "none",
-      enum: ["male", "female", "others","none"],
+      enum: ["male", "female", "others", "none"],
     },
     profilePicture: {
       type: {
         secure_url: String,
         public_id: String,
+        mime_type: String,
       },
-       
     },
     wishList: {
       type: Array,
@@ -52,8 +52,8 @@ const UserSchema = new Schema(
     ],
     preferences: {
       type: Schema.Types.ObjectId,
-      ref: "userPreferences",  
-    }
+      ref: "userPreferences",
+    },
   },
   { timestamps: true }
 );

@@ -28,7 +28,7 @@ userRouter.post(
   verifyToken,
   multerMiddleware.single("profileImage"),
   createUser
-);
+)
 userRouter.put("/profile", verifyToken, editUser);
 userRouter.patch("/profile/pic", verifyToken, multerMiddleware.single("profileImage"), updateProfilePicture);
 userRouter.delete("/profile/pic", verifyToken, deleteProfilePicture);
